@@ -1,0 +1,526 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>牛肉 BEEF · 官方网站</title>
+<meta name="description" content="牛肉（BEEF）——社区向 Minecraft 基岩版生存服务器。友善交流，共建世界。" />
+<meta name="theme-color" content="#0b1220" />
+<meta property="og:title" content="牛肉 BEEF · 官方网站" />
+<meta property="og:description" content="社区向 Minecraft 基岩版生存服务器。友善交流，共建世界。" />
+<meta property="og:image" content="assets/img/logo.svg" />
+<link rel="icon" type="image/svg+xml" href="assets/img/logo.svg" />
+<link rel="apple-touch-icon" href="assets/img/logo.svg" />
+<link rel="alternate" type="application/rss+xml" title="牛肉 BEEF RSS" href="feed.xml" />
+<link rel="stylesheet" href="assets/css/style.css" />
+</head>
+
+<body class="bg-default">
+
+<div class="bg-layer" aria-hidden="true"></div>
+<div class="bg-grain" aria-hidden="true"></div>
+
+<!-- ===================== 顶栏 ===================== -->
+<header class="topbar glass" id="topbar">
+  <div class="brand">
+    <img src="assets/img/logo.svg" alt="牛肉 logo" class="logo" />
+    <div class="brand-txt">
+      <strong id="brandName">牛肉</strong>
+      <span id="brandSub">BEEF SURVIVAL</span>
+    </div>
+  </div>
+
+  <nav class="nav" id="nav" aria-label="主导航"></nav>
+
+  <div class="top-tools">
+    <input class="gsearch" id="globalSearch" type="search" placeholder="搜索" aria-label="站内搜索" />
+    <span class="clock" id="clock">--:--:-- --</span>
+    <button class="tbtn" data-modal="my">我的</button>
+    <button class="tbtn" data-modal="plan">策划</button>
+    <button class="tbtn" data-modal="feedback">反馈</button>
+    <button class="tbtn admin" data-modal="admin" title="管理员面板（也可用 #admin 直达）">🔒 管理</button>
+    <button class="tbtn icon" id="themeBtn" title="切换明暗主题">☀</button>
+    <button class="tbtn primary" data-modal="lab">液态玻璃实验室</button>
+    <button class="tbtn icon menu" id="menuBtn" title="菜单">☰</button>
+  </div>
+</header>
+
+<div class="mobile-nav glass" id="mobileNav"></div>
+
+<main id="main">
+
+  <!-- ===================== 首页 ===================== -->
+  <section id="home" class="section" data-searchable="首页 牛肉 beef 服务器 生存">
+    <div class="hero glass">
+      <div class="hero-main">
+        <span class="status" id="serverStatus">
+          <i class="dot"></i><span class="status-txt">服务器运行中</span>
+        </span>
+        <h1 class="hero-title">牛肉 <em id="heroEn">BEEF</em></h1>
+        <p class="hero-slogan" id="heroSlogan"></p>
+
+        <div class="hero-row">
+          <span class="k">地址</span>
+          <code id="serverAddr"></code>
+          <button class="btn tiny" data-copy-el="serverAddr">复制</button>
+        </div>
+        <div class="hero-row">
+          <span class="k">QQ 群</span>
+          <code id="qqGroup"></code>
+          <button class="btn tiny" data-copy-el="qqGroup">复制</button>
+        </div>
+        <div class="hero-meta">
+          <span>已运行 <b id="uptime">--</b></span>
+          <span>·</span>
+          <span>开服于 <b id="sinceDate">--</b></span>
+          <span>·</span>
+          <span>版本 <b id="mcVer">基岩版 1.21+</b></span>
+        </div>
+      </div>
+      <div class="hero-side">
+        <div class="qr-card">
+          <div class="qr-box" id="qrBox"></div>
+          <p>扫码加群 / 赞助</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 最新公告跑马灯 -->
+  <div class="ticker glass" id="ticker">
+    <span class="tag">最新公告</span>
+    <div class="ticker-view"><div class="ticker-track" id="tickerTrack"></div></div>
+  </div>
+
+  <!-- 特色卡片 -->
+  <section id="features" class="section" data-searchable="特色 生存世界 赛事活动 活跃社区 公平规则">
+    <div class="grid grid-4" id="featureGrid"></div>
+  </section>
+
+  <!-- 服务器历史 / 管理团队 / 配置要求 -->
+  <section id="about" class="section" data-searchable="服务器历史 管理团队 配置要求">
+    <div class="grid grid-2">
+      <div class="stack">
+        <details class="fold glass">
+          <summary>服务器历史 <span class="chev">▼</span></summary>
+          <div class="fold-body timeline" id="historyList"></div>
+        </details>
+
+        <details class="fold glass">
+          <summary>管理团队（展开查看）<span class="chev">▼</span></summary>
+          <div class="fold-body">
+            <p class="hint">排名按照贡献顺序</p>
+            <div class="team-grid" id="teamList"></div>
+          </div>
+        </details>
+      </div>
+
+      <div class="stack">
+        <details class="fold glass">
+          <summary>配置要求（最低 / 推荐 · 仅供参考）<span class="chev">▼</span></summary>
+          <div class="fold-body" id="specBox"></div>
+        </details>
+
+        <details class="fold glass">
+          <summary>服务器规则速览<span class="chev">▼</span></summary>
+          <div class="fold-body" id="ruleBrief"></div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== 公告 ===================== -->
+  <section id="announcements" class="section" data-searchable="公告 服务器公告">
+    <div class="sec-head">
+      <h2>📣 服务器公告</h2>
+      <div class="sec-tools">
+        <input class="search" id="annSearch" type="search" placeholder="搜索公告" />
+      </div>
+    </div>
+    <div class="list" id="annList"></div>
+  </section>
+
+  <!-- ===================== 动态 ===================== -->
+  <section id="feed" class="section" data-searchable="动态 帖子 社区">
+    <div class="sec-head">
+      <h2>✍️ 服务器动态</h2>
+      <div class="sec-tools">
+        <div class="seg" id="feedSort">
+          <button class="on" data-sort="new">最新</button>
+          <button data-sort="hot">热门</button>
+        </div>
+        <div class="seg" id="feedType">
+          <button class="on" data-type="全部">全部</button>
+          <button data-type="官方">官方</button>
+          <button data-type="玩家">玩家</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="composer glass">
+      <div class="composer-row">
+        <input id="postNick" placeholder="游戏昵称" />
+        <input id="postTags" placeholder="标签（可选，用空格分隔）" />
+      </div>
+      <textarea id="postContent" rows="3" placeholder="内容"></textarea>
+      <div class="composer-row" id="postKeyRow" hidden>
+        <input id="postKey" placeholder="卡密（内测阶段需填写）" />
+      </div>
+      <div class="composer-row between">
+        <button class="btn ghost" id="postImgBtn">🖼 图片（可选）</button>
+        <span class="hint" id="postImgTip"></span>
+        <button class="btn primary" id="postSubmit">发布帖子</button>
+      </div>
+    </div>
+
+    <div class="list" id="postList"></div>
+  </section>
+
+  <!-- ===================== 商店 ===================== -->
+  <section id="shop" class="section" data-searchable="商店 商品 会员 充值">
+    <div class="sec-head"><h2>🛒 商店</h2><span class="sub">所有收入用于服务器维护与赛事奖励</span></div>
+    <div class="grid grid-3" id="shopGrid"></div>
+  </section>
+
+  <!-- ===================== 投票 ===================== -->
+  <section id="vote" class="section" data-searchable="投票 玩家投票 开发方向 模组">
+    <div class="sec-head"><h2>🗳️ 玩家投票</h2><span class="sub">你的选择决定服务器方向</span></div>
+    <div class="grid grid-3" id="pollGrid"></div>
+  </section>
+
+  <!-- ===================== 便捷工具 ===================== -->
+  <section id="quicktools" class="section" data-searchable="便捷工具 坐标换算 经验 颜色代码 抽奖">
+    <div class="sec-head"><h2>🧰 便捷工具</h2><span class="sub">纯前端计算，无需联网</span></div>
+    <div class="grid grid-2" id="quickGrid"></div>
+  </section>
+
+  <!-- ===================== 服务器工具 ===================== -->
+  <section id="servertools" class="section" data-searchable="服务器工具 禁用物品 任务 经济 物价">
+    <div class="sec-head">
+      <h2>🛠️ 服务器工具</h2>
+      <div class="sec-tools">
+        <button class="btn ghost" id="toolAdminBtn">管理</button>
+      </div>
+    </div>
+
+    <div class="tabs" id="toolTabs">
+      <button class="on" data-tab="ban">禁用物品</button>
+      <button data-tab="task">任务查询</button>
+      <button data-tab="eco">经济模拟器</button>
+    </div>
+
+    <div class="tool-pane" data-pane="ban">
+      <p class="hint">查物品是否被禁</p>
+      <input class="search block" id="banSearch" placeholder="搜索物品名称" />
+      <div class="list" id="banList"></div>
+      <div class="add-row" id="banAddRow" hidden>
+        <input id="banName" placeholder="物品名称" />
+        <input id="banReason" placeholder="禁用原因" />
+        <button class="btn primary" id="banAdd">添加物品</button>
+      </div>
+    </div>
+
+    <div class="tool-pane" data-pane="task" hidden>
+      <p class="hint">查任务详情</p>
+      <input class="search block" id="taskSearch" placeholder="搜索任务名称" />
+      <div class="list" id="taskList"></div>
+      <div class="add-row" id="taskAddRow" hidden>
+        <input id="taskName" placeholder="任务名称" />
+        <input id="taskDesc" placeholder="任务描述" />
+        <input id="taskReward" placeholder="奖励" />
+        <button class="btn primary" id="taskAdd">添加任务</button>
+      </div>
+    </div>
+
+    <div class="tool-pane" data-pane="eco" hidden>
+      <p class="hint">资产 / 套利 / 物价</p>
+      <div class="eco">
+        <div class="eco-form">
+          <label>物品
+            <select id="ecoItem"></select>
+          </label>
+          <label>数量 <input id="ecoQty" type="number" value="64" min="1" /></label>
+          <label>税率 % <input id="ecoTax" type="number" value="5" min="0" max="100" /></label>
+          <label>手续费 <input id="ecoFee" type="number" value="0" min="0" /></label>
+          <button class="btn primary" id="ecoCalc">计算</button>
+        </div>
+        <div class="eco-out" id="ecoOut"></div>
+      </div>
+      <div class="table-wrap"><table class="table" id="priceTable"></table></div>
+    </div>
+  </section>
+
+  <!-- ===================== 玩家公约 ===================== -->
+  <section id="rules" class="section" data-searchable="玩家公约 规则 处罚">
+    <div class="sec-head">
+      <h2>📜 玩家公约</h2>
+      <div class="sec-tools"><input class="search" id="ruleSearch" placeholder="搜索" /></div>
+    </div>
+    <div class="list" id="ruleList"></div>
+  </section>
+
+  <!-- ===================== 赛事活动 ===================== -->
+  <section id="events" class="section" data-searchable="赛事活动 牛肉杯 比赛">
+    <div class="sec-head"><h2>🏁 赛事活动</h2><span class="sub">公平竞技，赢取奖励</span></div>
+    <div id="eventList"></div>
+
+    <div class="grid grid-2" style="margin-top:14px">
+      <div class="card glass">
+        <h3>📢 近期赛事动态</h3>
+        <div id="eventNews"></div>
+      </div>
+      <div class="card glass">
+        <h3>🎬 赛事回放</h3>
+        <div id="replayList"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== 兑换码 ===================== -->
+  <section id="codes" class="section" data-searchable="兑换码 礼包 cdkey">
+    <div class="sec-head"><h2>🎁 兑换码</h2><span class="sub">在游戏内 / 客户端中输入兑换</span></div>
+    <div class="list" id="codeList"></div>
+  </section>
+
+  <!-- ===================== 服务器赞助 ===================== -->
+  <section id="sponsor" class="section" data-searchable="服务器赞助 赞助 排行榜">
+    <div class="sec-head"><h2>💖 服务器赞助</h2><span class="sub">自愿赞助，用于服务器续费与赛事奖金</span></div>
+    <div class="grid grid-2">
+      <div class="card glass center">
+        <h3>💳 赞助收款二维码</h3>
+        <div class="qr-box big" id="sponsorQr"></div>
+        <p class="hint">扫码后请备注游戏昵称，以便上榜</p>
+      </div>
+      <div class="card glass">
+        <h3>🏆 赞助排行榜</h3>
+        <div class="rank" id="sponsorRank"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== 聊天室 ===================== -->
+  <section id="chat" class="section" data-searchable="聊天室 实时聊天">
+    <div class="sec-head"><h2>💬 聊天室</h2><span class="sub" id="chatState">状态检测中…</span></div>
+    <div class="card glass chat-card">
+      <div class="chat-log" id="chatLog"></div>
+      <div class="chat-input">
+        <input id="chatName" placeholder="昵称（会显示在广播里）" />
+        <input id="chatMsg" placeholder="说点什么…" />
+        <button class="btn primary" id="chatSend">发送</button>
+      </div>
+      <p class="hint">本站为纯静态部署，聊天仅为浏览器本地演示，不会同步到其他玩家。</p>
+    </div>
+  </section>
+
+  <!-- ===================== 下载 ===================== -->
+  <section id="download" class="section" data-searchable="下载 客户端 apk">
+    <div class="sec-head"><h2>⬇️ 下载客户端</h2></div>
+    <div class="card glass dl-card">
+      <img src="assets/img/logo.svg" alt="" class="dl-logo" />
+      <div class="dl-txt">
+        <h3 id="dlTitle">牛肉 BEEF 官方客户端</h3>
+        <p>安卓指令工具 · 官网账号登录 · 指令库云端同步 · 选区助手 · 自动部署 · 官网功能直达</p>
+        <div class="dl-actions">
+          <button class="btn primary big" id="dlBtn">下载 APK</button>
+          <span class="hint" id="dlVer"></span>
+        </div>
+        <p class="hint">安装时请允许「安装未知应用」。更新内容见公告；客户端更新可直接在应用内公告页下载安装包。</p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- ===================== 页脚 ===================== -->
+<footer class="footer glass">
+  <div class="foot-col">
+    <h3 id="footBrand">牛肉 BEEF</h3>
+    <p id="footDesc"></p>
+  </div>
+  <div class="foot-col">
+    <h3>快捷导航</h3>
+    <ul id="footNav"></ul>
+  </div>
+  <div class="foot-col">
+    <h3>联系我们</h3>
+    <ul class="contact" id="footContact"></ul>
+  </div>
+  <div class="foot-bottom">
+    <span id="copyRight"></span>
+    <span class="foot-links">
+      <button class="link" data-modal="repo">开源仓库</button>
+      <a class="link" href="feed.xml">RSS 订阅</a>
+      <button class="link" data-modal="admin">管理</button>
+    </span>
+  </div>
+</footer>
+
+<button class="fab glass" id="toTop" title="返回顶部">↑</button>
+
+<!-- ===================== 弹层 ===================== -->
+<div class="modal-root" id="modalRoot">
+
+  <!-- 我的 -->
+  <div class="modal" id="modal-my">
+    <div class="modal-card glass">
+      <div class="modal-head"><h3>我的</h3><button class="x" data-close>✕</button></div>
+      <div class="modal-body">
+        <div class="profile">
+          <img src="assets/img/logo.svg" alt="" class="avatar" />
+          <div>
+            <input id="myNick" placeholder="你的游戏昵称" />
+            <p class="hint">昵称会显示在动态、聊天与投票记录中（仅保存在本机浏览器）。</p>
+          </div>
+        </div>
+        <div class="mini-stats" id="myStats"></div>
+        <h4>我的帖子</h4>
+        <div class="list" id="myPosts"></div>
+        <h4>我的投票</h4>
+        <div class="list" id="myVotes"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 策划 -->
+  <div class="modal" id="modal-plan">
+    <div class="modal-card glass">
+      <div class="modal-head"><h3>策划 · 开发路线</h3><button class="x" data-close>✕</button></div>
+      <div class="modal-body timeline" id="planList"></div>
+    </div>
+  </div>
+
+  <!-- 反馈 -->
+  <div class="modal" id="modal-feedback">
+    <div class="modal-card glass">
+      <div class="modal-head"><h3>问题反馈</h3><button class="x" data-close>✕</button></div>
+      <div class="modal-body">
+        <select id="fbType">
+          <option>问题反馈</option>
+          <option>功能建议</option>
+          <option>违规举报</option>
+          <option>赛事报名</option>
+          <option>其他</option>
+        </select>
+        <textarea id="fbContent" rows="4" placeholder="详细描述你遇到的问题或建议…"></textarea>
+        <input id="fbContact" placeholder="联系方式（QQ / 邮箱，可选）" />
+        <button class="btn primary block" id="fbSubmit">提交反馈</button>
+        <p class="hint">提交后保存在本机浏览器，正式接入后端后可自动发送到管理后台。</p>
+        <div class="list" id="fbList"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 开源仓库 -->
+  <div class="modal" id="modal-repo">
+    <div class="modal-card glass small">
+      <div class="modal-head"><h3>开源仓库</h3><button class="x" data-close>✕</button></div>
+      <div class="modal-body center">
+        <p>开源就是源代码公开：任何人都可以查看、学习甚至改进这套代码。本站的全部源代码托管在 GitHub 上，点下方按钮即可前往查看。</p>
+        <button class="btn primary block" id="repoGo">前往查看</button>
+        <button class="btn ghost block" data-close>知道了</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 管理员面板 -->
+  <div class="modal" id="modal-admin">
+    <div class="modal-card glass wide">
+      <div class="modal-head"><h3>管理员面板</h3><button class="x" data-close>✕</button></div>
+      <div class="modal-body" id="adminBody"></div>
+    </div>
+  </div>
+
+  <!-- 液态玻璃实验室 -->
+  <div class="modal" id="modal-lab">
+    <div class="modal-card glass wide">
+      <div class="modal-head"><h3>液态玻璃实验室</h3><button class="x" data-close>✕</button></div>
+      <div class="modal-body lab">
+
+        <div class="lab-group">
+          <h4>背景壁纸</h4>
+          <div class="swatches" id="wallpapers"></div>
+          <div class="custom-colors" id="customColors" hidden>
+            <label>起始色 <input type="color" id="c1" value="#0b1220" /></label>
+            <label>结束色 <input type="color" id="c2" value="#1b3a4b" /></label>
+          </div>
+        </div>
+
+        <div class="lab-group">
+          <h4>强度预设</h4>
+          <div class="seg" id="intensity">
+            <button data-i="soft">柔和</button>
+            <button data-i="normal" class="on">适中</button>
+            <button data-i="strong">强烈</button>
+          </div>
+        </div>
+
+        <div class="lab-group">
+          <h4>UI 透明度</h4>
+          <input type="range" id="alpha" min="2" max="40" value="10" />
+          <span class="val" id="alphaVal">通透 10%</span>
+        </div>
+
+        <div class="lab-group">
+          <h4>光影 Shadow</h4>
+          <label>阴影扩展 <input type="range" id="spread" min="0" max="80" value="40" /><span class="val" id="spreadVal">40px</span></label>
+          <label>光效强度 <input type="range" id="glow" min="0" max="100" value="16" /><span class="val" id="glowVal">16%</span></label>
+          <label>偏移 <input type="range" id="offset" min="0" max="40" value="12" /><span class="val" id="offsetVal">12px</span></label>
+        </div>
+
+        <div class="lab-group">
+          <h4>拖动模式</h4>
+          <div class="seg" id="dragMode">
+            <button data-d="off" class="on">关闭</button>
+            <button data-d="grid">网格排序</button>
+            <button data-d="free">自由摆放</button>
+          </div>
+          <p class="hint">网格排序：拖动卡片标题栏可换位置；自由摆放：拖动卡片任意处自由移动。</p>
+        </div>
+
+        <div class="lab-group">
+          <h4>选项</h4>
+          <div class="checks">
+            <label><input type="checkbox" id="optGlass" checked /> 玻璃效果</label>
+            <label><input type="checkbox" id="optPerf" /> 性能优先</label>
+            <label><input type="checkbox" id="optDark" /> 深色玻璃</label>
+          </div>
+        </div>
+
+        <div class="lab-group">
+          <h4>分享</h4>
+          <div class="lab-actions">
+            <button class="btn ghost" id="labRandom">随机主题</button>
+            <button class="btn ghost" id="labReset">重置默认</button>
+            <button class="btn ghost" id="labShare">生成分享码</button>
+          </div>
+          <textarea id="shareCode" rows="2" placeholder="点击「生成分享码」后会出现在这里，复制给别人即可复现同一套主题"></textarea>
+          <button class="btn ghost" id="shareCopy">复制</button>
+        </div>
+
+        <div class="lab-foot">
+          <span>当前 FPS <b id="fps">--</b></span>
+          <span>帧时间 <b id="frametime">--</b></span>
+          <span>渲染负载 <b id="renderLoad">--</b></span>
+          <button class="btn primary" id="labApply">应用</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="toast-wrap" id="toastWrap"></div>
+
+<noscript>
+  <div class="noscript">本站需要开启 JavaScript 才能获得完整体验。</div>
+</noscript>
+
+<!-- 运行时配置：由 scripts/generate-env.mjs 依据环境变量生成，必须最先加载 -->
+<script src="assets/js/env.js"></script>
+<script src="assets/js/config.js"></script>
+<script src="assets/js/core.js"></script>
+<script src="assets/js/api.js"></script>
+<script src="assets/js/glass.js"></script>
+<script src="assets/js/sections.js"></script>
+<script src="assets/js/admin.js"></script>
+<script src="assets/js/main.js"></script>
+</body>
+</html>
