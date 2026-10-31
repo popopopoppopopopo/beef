@@ -1,0 +1,14 @@
+{
+  "name": "beef-site",
+  "version": "1.4.0",
+  "private": true,
+  "description": "牛肉 BEEF：EdgeOne 纯前端 + 腾讯云 SCF 后端（密钥全走 GitHub Secrets）",
+  "scripts": {
+    "genenv": "node scripts/generate-env.mjs",
+    "backend": "node backend/index.js",
+    "backend:install": "npm --prefix backend install --omit=dev"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

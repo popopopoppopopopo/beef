@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+  <channel>
+    <title>牛肉 BEEF · 服务器公告</title>
+    <link>https://beef.netlify.app/</link>
+    <description>牛肉（BEEF）——社区向 Minecraft 基岩版生存服务器</description>
+    <language>zh-CN</language>
+    <item>
+      <title>S1 赛季「牛肉杯」正式开启</title>
+      <description>牛肉 BEEF 首个官方 PVP 赛事进入筹备阶段，面向全体玩家开放。</description>
+      <pubDate>Tue, 20 Oct 2026 00:00:00 GMT</pubDate>
+      <link>https://beef.netlify.app/#announcements</link>
+    </item>
+    <item>
+      <title>官网改版上线 · 液态玻璃实验室</title>
+      <description>新增液态玻璃实验室，可自定义壁纸、玻璃强度与光影，并支持主题分享码。</description>
+      <pubDate>Mon, 12 Oct 2026 00:00:00 GMT</pubDate>
+      <link>https://beef.netlify.app/#announcements</link>
+    </item>
+  </channel>
+</rss>

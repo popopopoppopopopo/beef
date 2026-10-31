@@ -1,0 +1,13 @@
+{
+  "name": "beef-backend",
+  "version": "1.0.0",
+  "private": true,
+  "description": "牛肉 BEEF 后端：腾讯云 SCF 云函数 + COS 存储",
+  "main": "index.js",
+  "engines": {
+    "node": ">=16"
+  },
+  "dependencies": {
+    "cos-nodejs-sdk-v5": "^2.14.2"
+  }
+}
